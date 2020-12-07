@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Previewer</title>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./marked.js"></script>
+    <script>
+    marked.setOptions({
+      gfm: true,
+      highlight: false,
+      tables: false,
+      breaks: true,
+      pedantic: false,
+      sanitize: false,
+      smartLists: true,
+      smartypants: false,
+      langPrefix: false
+    });
+
+        function updatePreview() {
+            document.getElementById("preview").innerHTML = marked(document.getElementById("editor").value);
+        }
+
+        function setDefaultText() {
+            let defaultText = `
+        
+# h1
+
+## h2
+
+[my portfolio](http://treehausllc.com)
+
+<dl>
+  <dt>Definition List</dt>  
+  <dd>Something</dd>
+  <dt>Markdown in HTML</dt>
+  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
+</dl>  
+
+- code
+- all
+- day
+
+> just learning
+
+**bold text**
+
+*italic text*
+
+![mario](https://pm1.narvii.com/7280/99faa236aafd49c34f011f56f728a36439e72126r1-256-256v2_hq.jpg)
+
+\`This is an example of inline code\`
+
+\`\`\`
+function exampleOf() {
+  return multilineCodeBlock;
+}
+\`\`\`
+
+---
+      `
+            let editorDefaultText = document.getElementById("editor");
+            let previewDefaultText = document.getElementById("preview");
+            editorDefaultText.value = defaultText;
+            previewDefaultText.innerHTML = marked(defaultText);
+        }    
+    </script>
+</head>
+
+<body onload = "setDefaultText()">
+    <div>
+        <h1 id = "title">Markdown Previewer</h1>
+    </div>
+    <div class = "container">
+            <div class = "editor">
+                <h2>Editor</h2>
+                <textarea id = "editor" onkeyup="updatePreview()"></textarea>
+            </div>
+            <div class = "preview">
+                <h2>Preview</h2>
+                <div id = "preview"></div>
+            </div>
+    </div>
+
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>
