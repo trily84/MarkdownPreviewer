@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Markdown Previewer jQuery</title>
     <link rel="stylesheet" href="./style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown Previewer</title>    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./jquery.js"></script>
     <script src="./marked.js"></script>
     <script>
-    marked.setOptions({
-      gfm: true,
-      highlight: false,
-      tables: false,
-      breaks: true,
-      pedantic: false,
-      sanitize: false,
-      smartLists: true,
-      smartypants: false,
-      langPrefix: false
-    });
+        marked.setOptions({
+        gfm: true,
+        highlight: false,
+        tables: false,
+        breaks: true,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false,
+        langPrefix: false
+        });
 
-        function updatePreview() {
-            document.getElementById("preview").innerHTML = marked(document.getElementById("editor").value);
-        }
-
-        function setDefaultText() {
-            let defaultText = `
-        
+        let defaultText = `
 # h1
 
 ## h2
@@ -61,30 +56,34 @@ function exampleOf() {
 \`\`\`
 
 ---
-      `
-            let editorDefaultText = document.getElementById("editor");
-            let previewDefaultText = document.getElementById("preview");
-            editorDefaultText.value = defaultText;
-            previewDefaultText.innerHTML = marked(defaultText);
-        }    
+      `  
+        $(document).ready(function(){
+            $("#editor").val(defaultText);
+            $("#preview").html(marked(defaultText));
+            $("#editor").keyup(function(){
+                $("#preview").html(marked($("#editor").val()));
+                });
+        })  
+
     </script>
+   
 </head>
 
-<body onload = "setDefaultText()">
+<body>
     <div>
         <h1 id = "title">Markdown Previewer</h1>
     </div>
     <div class = "container">
             <div class = "editor">
                 <h2>Editor</h2>
-                <textarea id = "editor" onkeyup="updatePreview()"></textarea>
+                <textarea id = "editor"></textarea>
             </div>
             <div class = "preview">
-                <h2>Preview</h2>
+                <h2 style = "text-align: center">Preview</h2>
                 <div id = "preview"></div>
             </div>
     </div>
-
     <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
 </body>
 </html>

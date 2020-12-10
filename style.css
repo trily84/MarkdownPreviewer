@@ -13,16 +13,15 @@
 
 .editor {
   flex-grow: 1;
-  flex-basis: 300px;
+  flex-basis: 100px;
   margin-right: 5px;
   text-align: center;
 }
 
 .preview {
   flex-grow: 1;
-  flex-basis: 300px;
+  flex-basis: 100px;
   margin-left: 5px;
-  text-align: center;
 }
 
 #editor {
